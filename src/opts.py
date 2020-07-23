@@ -127,6 +127,8 @@ class opts(object):
         opt.gpus = [int(gpu) for gpu in opt.gpus.split(',')]
         opt.gpus = [i for i in range(len(opt.gpus))] if opt.gpus[0] >= 0 else [-1]
         opt.lr_step = [int(i) for i in opt.lr_step.split(',')]
+        
+        os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpus_str
 
         opt.mean = [0.40789654, 0.44719302, 0.47026115]
         opt.std = [0.28863828, 0.27408164, 0.27809835]
