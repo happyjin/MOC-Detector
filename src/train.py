@@ -7,6 +7,7 @@ import os
 import torch
 import torch.utils.data
 from opts import opts
+opt = opts().parse()
 from MOC_utils.model import create_model, load_model, save_model, load_coco_pretrained_model, load_imagenet_pretrained_model
 from trainer.logger import Logger
 from datasets.init_dataset import get_dataset
@@ -49,7 +50,7 @@ def main(opt):
 
     logger = Logger(opt, epoch_train_writer, epoch_val_writer)
 
-    os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpus_str
+    #os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpus_str
     opt.device = torch.device('cuda' if opt.gpus[0] >= 0 else 'cpu')
 
     model = create_model(opt.arch, opt.branch_info, opt.head_conv, opt.K)
@@ -163,5 +164,5 @@ def main(opt):
 
 
 if __name__ == '__main__':
-    opt = opts().parse()
+    #opt = opts().parse()
     main(opt)
